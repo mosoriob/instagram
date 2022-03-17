@@ -1,4 +1,4 @@
 import React from "react";
 export default function Profile(){
-    return (<p>Hello</p>)
+    return (<p>Hello Profile</p>)
 }
