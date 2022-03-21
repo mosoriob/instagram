@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
 export default function Login() {
+    useEffect(() => {
+        document.title = 'Login';
+    }, []);
+    
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const isInvalid = email === '' || password === '';
+    const [error, setError] = React.useState(null);
+    console.log('Login');
+
     return (
         <div className="container flex mx-auto max-w-screen-md items-center h-screen">
             <div className="flex w-3/5">
@@ -20,16 +30,21 @@ export default function Login() {
                         className="text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2"
                         type="text"
                         placeholder="Email address"
+                        onChange={({ target }) => setEmail(target.value)}
+                        name="email"
                     />
                     <input
                         aria-label="Enter your password"
                         className="text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2"
                         type="password"
                         placeholder="Password"
+                        name="password"
+                        onChange={({ target }) => setPassword(target.value)}
                     />
                     <button
                         type="submit"
-                        className={`bg-blue-500 text-white w-full rounded h-8 font-bold`}
+                        disabled={isInvalid}
+                        className={`bg-blue-500 text-white w-full rounded h-8 font-bold ${isInvalid && 'opacity-50'}`}
                     >
                         Log In
                     </button>
