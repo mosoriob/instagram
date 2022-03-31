@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
 import * as ROUTES from "../constants/routes";
-
+import { doesUsernameExist } from "../services/firebase";
 export default function Signup() {
   const [userName, setUserName] = useState("");
   const [fullName, setFullName] = useState("");
@@ -21,19 +21,26 @@ export default function Signup() {
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
-      const new_user = await firebase.auth().createUserWithEmailAndPassword(emailAddress, password);
-      await new_user.user.updateProfile({
-        displayName: fullName,
-      });
-      await firebase.firestore().collection("users").doc(new_user.user.uid).set({
-        fullName: fullName,
-        userName: userName,
-        emailAddress: emailAddress,
-        following: [],
-        followers: [],
-        dateCreated: Date.now()
-      });
-      setError("");
+      const userExist = await doesUsernameExist(userName)
+      console.log(userExist)
+      if (userExist) {
+        setError("Username already exist");
+      } else {
+        const new_user = await firebase.auth().createUserWithEmailAndPassword(emailAddress, password);
+        await new_user.user.updateProfile({
+          displayName: fullName,
+        });
+        await firebase.firestore().collection("users").doc(new_user.user.uid).set({
+          fullName: fullName,
+          userName: userName,
+          emailAddress: emailAddress,
+          following: [],
+          followers: [],
+          dateCreated: Date.now()
+        });
+        setError("");
+        history.push(ROUTES.DASHBOARD);
+      }
     } catch (error) {
       setConfirmPassword("");
       setPassword("");
