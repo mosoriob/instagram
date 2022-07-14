@@ -17,7 +17,7 @@ export default function Dashboard(){
         <div className="bg-gray-100">
 
             <Header />
-            <div class="grid grid-cols-4 gap-4 justify-between mx-auto max-w-screen-lg bg-gray-100">
+            <div className="grid grid-cols-4 gap-4 justify-between mx-auto max-w-screen-lg bg-gray-100">
                 <Timeline />
                 <SideBar />
             </div>
