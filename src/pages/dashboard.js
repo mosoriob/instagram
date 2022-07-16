@@ -1,25 +1,19 @@
-import React, { useEffect } from "react";
-import Header from "../components/header";
-import Timeline from "../components/timeline";
-import SideBar from "../components/sidebar";
-export default function Dashboard(){
+import React, { useEffect } from 'react';
+import Header from '../components/header.js';
+import Timeline from '../components/timeline.js';
+import Sidebar from '../components/sidebar/index.js';
+
+export default function Dashboard() {
     useEffect(() => {
-        document.title = "Dashboard";
+        document.title = 'Instagram';
     }, []);
-
-    // Challange:
-
-    // Render the header, sidebar, and timeline components.
-    // Tailwind margin auto
-    // 
-
+       
     return (
-        <div className="bg-gray-100">
-
+        <div className="bg-gray-background">
             <Header />
-            <div className="grid grid-cols-4 gap-4 justify-between mx-auto max-w-screen-lg bg-gray-100">
+            <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
                 <Timeline />
-                <SideBar />
+                <Sidebar />
             </div>
         </div>
     )
