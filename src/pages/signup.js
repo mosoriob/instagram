@@ -31,6 +31,7 @@ export default function Signup() {
           displayName: fullName,
         });
         await firebase.firestore().collection("users").doc(new_user.user.uid).set({
+          userId: new_user.user.uid,
           fullName: fullName,
           userName: userName,
           emailAddress: emailAddress,
