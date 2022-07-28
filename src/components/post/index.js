@@ -10,7 +10,7 @@ const Post = ({content}) => {
   const handleFocus = () => commentInput.current.focus();
   return (
     <div className="mb-16 border-gray-50 bg-white border border-rounded col-span-4">
-        <Header />
+        <Header username={content.username}/>
 
         <Image src={content.imageSrc} caption={content.caption} />
         <Actions 
